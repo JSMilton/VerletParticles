@@ -13,10 +13,11 @@
 #include "glUtil.h"
 #include "Utils.h"
 
+#define BUFFER_COUNT 2
+#define MAX_PARTICLES 10000
+
 class BillboardShader;
 class FeedbackShader;
-
-const int BUFFER_COUNT = 2;
 
 class GLRenderer {
     struct Particle
@@ -40,6 +41,7 @@ private:
     void initBillboardShader();
     void initFeedbackShader();
     void createParticleBuffers();
+    void drawParticles();
     
     glm::mat4 mProjectionMatrix;
     glm::mat4 mViewMatrix;
