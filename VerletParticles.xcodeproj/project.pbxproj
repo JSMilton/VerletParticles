@@ -1259,6 +1259,7 @@
 				4323042419587FE900BA0BD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4323042519587FE900BA0BD8 /* Build configuration list for PBXNativeTarget "VerletParticlesTests" */ = {
 			isa = XCConfigurationList;
@@ -1267,6 +1268,7 @@
 				4323042719587FE900BA0BD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

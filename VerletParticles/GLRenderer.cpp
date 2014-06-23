@@ -23,7 +23,48 @@ void GLRenderer::initOpenGL() {
     mViewHeight = 800;
     reshape(1200, 800);
     
+    createParticleBuffers();
+    
     render(0.0);
+}
+
+void GLRenderer::initBillboardShader() {
+    
+}
+
+void GLRenderer::initFeedbackShader() {
+    
+}
+
+void GLRenderer::createParticleBuffers() {
+    Particle particles[MAX_PARTICLES];
+    float width, height;
+    width = sqrt((float)MAX_PARTICLES);
+    height = width;
+    for (int i = 0; i < width; i++){
+        for (int j = 0; j < height; j++){
+            int index = i * width + j;
+            particles[index].position.x = i / width * 2 - 1.0;
+            particles[index].position.y = j / height * 2 - 1.0;
+            particles[index].position.z = 1;
+            particles[index].previousPosition = particles[index].position;
+            particles[index].acceleration = glm::vec3(0,0,0);
+        }
+    }
+    
+    glGenBuffers(BUFFER_COUNT, mVBO);
+    glGenVertexArrays(BUFFER_COUNT, mVAO);
+    for (int i = 0; i < BUFFER_COUNT; i++){
+        glBindVertexArray(mVAO[i]);
+        glBindBuffer(GL_ARRAY_BUFFER, mVBO[i]);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(particles), particles, GL_STATIC_DRAW);
+    }
+    
+    glBindVertexArray(0);
+}
+
+void GLRenderer::drawParticles() {
+    
 }
 
 void GLRenderer::render(float dt) {
