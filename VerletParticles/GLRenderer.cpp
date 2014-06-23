@@ -10,13 +10,11 @@
 
 NvVertexAttribute GLRenderer::ms_attributes[] =
 {
-//    {"a_Type",    GL_BYTE,1,          offsetof(Particle,type),    sizeof(Particle),false},
-//    {"a_Color",   GL_UNSIGNED_BYTE,3, offsetof(Particle,color),   sizeof(Particle),false},
-//    {"a_Age",     GL_FLOAT,1,         offsetof(Particle,age),     sizeof(Particle),false},
-//    {"a_Position",GL_FLOAT,3,         offsetof(Particle,position),sizeof(Particle),false},
-//    {"a_Velocity",GL_FLOAT,3,         offsetof(Particle,velocity),sizeof(Particle),false},
-//    
-//    {NULL,0,0,0,0,false}
+    {"a_Position", GL_FLOAT, 3, offsetof(Particle,position),sizeof(Particle),false},
+    {"a_PreviousPosition", GL_FLOAT, 3, offsetof(Particle,previousPosition),sizeof(Particle),false},
+    {"a_Acceleration", GL_FLOAT, 3, offsetof(Particle,acceleration),sizeof(Particle),false},
+    
+    {NULL,0,0,0,0,false}
 };
 
 void GLRenderer::initOpenGL() {
