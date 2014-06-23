@@ -37,6 +37,10 @@ private:
     void resetFramebuffers();
     void freeGLBindings() const;
     
+    void initBillboardShader();
+    void initFeedbackShader();
+    void createParticleBuffers();
+    
     glm::mat4 mProjectionMatrix;
     glm::mat4 mViewMatrix;
     glm::mat4 mPreviousViewMatrix;
