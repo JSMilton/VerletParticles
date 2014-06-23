@@ -13,10 +13,10 @@
 #include "glUtil.h"
 #include "Utils.h"
 
-class FBMShader;
 class BillboardShader;
-class EmitterFeedbackShader;
 class FeedbackShader;
+
+const int BUFFER_COUNT = 2;
 
 class GLRenderer {
     struct Particle
@@ -43,6 +43,14 @@ private:
     
     int mViewWidth;
     int mViewHeight;
+    
+    int mCurrentBuffer;
+    
+    GLuint mVAO[BUFFER_COUNT];
+    GLuint mVBO[BUFFER_COUNT];
+    
+    BillboardShader *mBillboardShader;
+    FeedbackShader *mFeedbackShader;
     
     static NvVertexAttribute ms_attributes[];
 };
