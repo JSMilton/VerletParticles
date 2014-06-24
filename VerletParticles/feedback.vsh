@@ -1,11 +1,9 @@
 
 in vec3 aPosition;
-in vec3 aPreviousPosition;
-in vec3 aAcceleration;
+in vec3 aVelocity;
 
 out vec3 vPosition;
-out vec3 vPreviousPosition;
-out vec3 vAcceleration;
+out vec3 vVelocity
 
 uniform float uDeltaTime;
 uniform vec3 uMousePosition;
@@ -14,7 +12,8 @@ uniform float uAreaOfEffect;
 
 void main()
 {
-    vPreviousPosition = aPosition;
-    vPosition = aPosition + 0.001;
-    vAcceleration = vec3(0);
+    vec3 oldVel = aVelocity;
+    vec3 accel = vec3(0,0,1);
+    vVelocity = aVelocity + accel * uDeltaTime;
+    vPosition = aPosition + (oldVel + aVelocity) * 0.5 * dt;
 }

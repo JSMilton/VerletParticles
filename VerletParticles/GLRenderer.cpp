@@ -29,11 +29,10 @@ void GLRenderer::initBillboardShader() {
 
 void GLRenderer::initFeedbackShader() {
     mFeedbackShader = new FeedbackShader;
-    const GLchar* FeedbackVaryings[3] =
+    const GLchar* FeedbackVaryings[2] =
     {
         "vPosition",
-        "vPreviousPosition",
-        "vAcceleration",
+        "vVelocity",
     };
     
     glTransformFeedbackVaryings(mFeedbackShader->getProgram(),countof(FeedbackVaryings),
@@ -67,8 +66,6 @@ void GLRenderer::createParticleBuffers() {
         glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Particle), 0);
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Particle), (void*)(sizeof(GLfloat)*3));
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 3, GL_FLOAT, false, sizeof(Particle), (void*)(sizeof(GLfloat)*6));
     }
     
     glBindVertexArray(0);
@@ -86,6 +83,7 @@ void GLRenderer::render(float dt) {
     freeGLBindings();
     
     mFeedbackShader->enable();
+    glUniform1f(mFeedbackShader->mDeltaTimeHandle, dt);
     glBindVertexArray(mVAO[(mCurrentBuffer+1)%BUFFER_COUNT]);
     glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mVBO[mCurrentBuffer]);
     glEnable(GL_RASTERIZER_DISCARD);
