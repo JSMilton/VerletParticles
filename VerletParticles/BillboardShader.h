@@ -11,14 +11,9 @@
 class BillboardShader : public BaseShader {
 public:
     BillboardShader();
-    
-    GLint mParticleLifetimeHandle;
+
     GLint mModelViewProjectionHandle;
-    GLint mModelViewHandle;
     GLint mRightHandle;
     GLint mUpHandle;
     GLint mBillboardSizeHandle;
-    GLint mVelocityScaleHandle;
-    GLint mTextureHandle;
-    GLint mUseColorsHandle;
 };

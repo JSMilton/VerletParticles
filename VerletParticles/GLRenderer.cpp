@@ -7,15 +7,8 @@
 //
 
 #include "GLRenderer.h"
-
-NvVertexAttribute GLRenderer::ms_attributes[] =
-{
-    {"a_Position", GL_FLOAT, 3, offsetof(Particle,position),sizeof(Particle),false},
-    {"a_PreviousPosition", GL_FLOAT, 3, offsetof(Particle,previousPosition),sizeof(Particle),false},
-    {"a_Acceleration", GL_FLOAT, 3, offsetof(Particle,acceleration),sizeof(Particle),false},
-    
-    {NULL,0,0,0,0,false}
-};
+#include "BillboardShader.h"
+#include "FeedbackShader.h"
 
 void GLRenderer::initOpenGL() {
     glClearColor(0.f, 0.f, 0.f, 1.0f);
@@ -24,16 +17,28 @@ void GLRenderer::initOpenGL() {
     reshape(1200, 800);
     
     createParticleBuffers();
+    initBillboardShader();
+    initFeedbackShader();
     
     render(0.0);
 }
 
 void GLRenderer::initBillboardShader() {
-    
+    mBillboardShader = new BillboardShader;
 }
 
 void GLRenderer::initFeedbackShader() {
+    mFeedbackShader = new FeedbackShader;
+    const GLchar* FeedbackVaryings[3] =
+    {
+        "vPosition",
+        "vPreviousPosition",
+        "vAcceleration",
+    };
     
+    glTransformFeedbackVaryings(mFeedbackShader->getProgram(),countof(FeedbackVaryings),
+                                FeedbackVaryings,GL_INTERLEAVED_ATTRIBS);
+    mFeedbackShader->linkProgram();
 }
 
 void GLRenderer::createParticleBuffers() {
@@ -58,6 +63,12 @@ void GLRenderer::createParticleBuffers() {
         glBindVertexArray(mVAO[i]);
         glBindBuffer(GL_ARRAY_BUFFER, mVBO[i]);
         glBufferData(GL_ARRAY_BUFFER, sizeof(particles), particles, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Particle), 0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Particle), (void*)(sizeof(GLfloat)*3));
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 3, GL_FLOAT, false, sizeof(Particle), (void*)(sizeof(GLfloat)*6));
     }
     
     glBindVertexArray(0);
@@ -75,6 +86,18 @@ void GLRenderer::render(float dt) {
     freeGLBindings();
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glm::mat4 mvp = mProjectionMatrix * mViewMatrix;
+    glm::vec4 right = mViewMatrix[0];
+    glm::vec4 up = mViewMatrix[1];
+    
+    mBillboardShader->enable();
+    glUniformMatrix4fv(mBillboardShader->mModelViewProjectionHandle, 1, GL_FALSE, glm::value_ptr(mvp));
+    glUniform3f(mBillboardShader->mRightHandle, right.x, right.y, right.z);
+    glUniform3f(mBillboardShader->mUpHandle, up.x, up.y, up.z);
+    glUniform1f(mBillboardShader->mBillboardSizeHandle, 0.01f);
+    glBindVertexArray(mVAO[0]);
+    glDrawArrays(GL_POINTS, 0, MAX_PARTICLES);
 }
 
 void GLRenderer::reshape(int width, int height) {

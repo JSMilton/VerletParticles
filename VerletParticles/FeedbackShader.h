@@ -11,11 +11,5 @@
 class FeedbackShader : public BaseShader {
 public:
     FeedbackShader();
-    
-    GLint mTimeHandle;
-    GLint mDeltaTimeHandle;
-    GLint mCTimeHandle;
-    GLint mRandomTextureHandle;
-    GLint mFBMTextureHandle;
-    GLint mParticleLifetimeHandle;
+    //GLint mDeltaTimeHandle;
 };

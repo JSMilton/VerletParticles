@@ -8,17 +8,6 @@
 
 #include "FeedbackShader.h"
 
-FeedbackShader::FeedbackShader() : BaseShader("feedback", NULL, "feedback") {
-    mTimeHandle = getUniformLocation("u_Time");
-    mDeltaTimeHandle = getUniformLocation("u_DeltaTime");
-    mCTimeHandle = getUniformLocation("u_cTime");
-    mRandomTextureHandle = getUniformLocation("u_RandomTexture");
-    mFBMTextureHandle = getUniformLocation("u_FBMTexture");
-    mParticleLifetimeHandle = getUniformLocation("u_ParticleLifetime");
-    
-    printf("%i\n", mTimeHandle);
-    printf("%i\n", mDeltaTimeHandle);
-    printf("%i\n", mCTimeHandle);
-    printf("%i\n", mRandomTextureHandle);
-    printf("%i\n", mFBMTextureHandle);
+FeedbackShader::FeedbackShader() : BaseShader("feedback", NULL, NULL) {
+    //mDeltaTimeHandle = getUniformLocation("u_DeltaTime");
 }

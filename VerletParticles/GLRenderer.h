@@ -57,6 +57,4 @@ private:
     
     BillboardShader *mBillboardShader;
     FeedbackShader *mFeedbackShader;
-    
-    static NvVertexAttribute ms_attributes[];
 };
