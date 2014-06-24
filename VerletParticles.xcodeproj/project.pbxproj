@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		430C84DD1959750400ED9795 /* BillboardShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430C84DA1959750400ED9795 /* BillboardShader.cpp */; };
+		430C84DE1959750400ED9795 /* FeedbackShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 430C84DC1959750400ED9795 /* FeedbackShader.cpp */; };
+		430C84E019597A4400ED9795 /* feedback.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 430C84DF19597A4400ED9795 /* feedback.vsh */; };
 		4323040B19587FE900BA0BD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323040A19587FE900BA0BD8 /* main.m */; };
 		4323040E19587FE900BA0BD8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4323040D19587FE900BA0BD8 /* AppDelegate.m */; };
 		4323041019587FE900BA0BD8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4323040F19587FE900BA0BD8 /* Images.xcassets */; };
@@ -142,6 +145,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		430C84D91959750400ED9795 /* BillboardShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillboardShader.h; sourceTree = "<group>"; };
+		430C84DA1959750400ED9795 /* BillboardShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BillboardShader.cpp; sourceTree = "<group>"; };
+		430C84DB1959750400ED9795 /* FeedbackShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackShader.h; sourceTree = "<group>"; };
+		430C84DC1959750400ED9795 /* FeedbackShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FeedbackShader.cpp; sourceTree = "<group>"; };
+		430C84DF19597A4400ED9795 /* feedback.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = feedback.vsh; sourceTree = "<group>"; };
 		4323040519587FE900BA0BD8 /* VerletParticles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerletParticles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4323040919587FE900BA0BD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4323040A19587FE900BA0BD8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -548,6 +556,10 @@
 			children = (
 				432305B2195880BA00BA0BD8 /* BaseShader.h */,
 				432305B3195880BA00BA0BD8 /* BaseShader.cpp */,
+				430C84D91959750400ED9795 /* BillboardShader.h */,
+				430C84DA1959750400ED9795 /* BillboardShader.cpp */,
+				430C84DB1959750400ED9795 /* FeedbackShader.h */,
+				430C84DC1959750400ED9795 /* FeedbackShader.cpp */,
 			);
 			name = "Shader classes";
 			sourceTree = "<group>";
@@ -555,6 +567,7 @@
 		432304441958804A00BA0BD8 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				430C84DF19597A4400ED9795 /* feedback.vsh */,
 				432305B5195880D200BA0BD8 /* billboard.fsh */,
 				432305B6195880D200BA0BD8 /* billboard.gsh */,
 				432305B7195880D200BA0BD8 /* billboard.vsh */,
@@ -987,6 +1000,7 @@
 				432305A31958807100BA0BD8 /* rotate_vector.inl in Resources */,
 				4323059B1958807100BA0BD8 /* optimum_pow.inl in Resources */,
 				432305AE1958807100BA0BD8 /* vec1.inl in Resources */,
+				430C84E019597A4400ED9795 /* feedback.vsh in Resources */,
 				432305541958807100BA0BD8 /* intrinsic_exponential.inl in Resources */,
 				432305AB1958807100BA0BD8 /* transform.inl in Resources */,
 				432305791958807100BA0BD8 /* associated_min_max.inl in Resources */,
@@ -1071,7 +1085,9 @@
 				432305521958807100BA0BD8 /* glm.cpp in Sources */,
 				4323040B19587FE900BA0BD8 /* main.m in Sources */,
 				432304411958802800BA0BD8 /* ObjModelLoader.cpp in Sources */,
+				430C84DD1959750400ED9795 /* BillboardShader.cpp in Sources */,
 				432304371958801B00BA0BD8 /* GLRenderer.cpp in Sources */,
+				430C84DE1959750400ED9795 /* FeedbackShader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
