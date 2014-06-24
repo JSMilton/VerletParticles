@@ -51,8 +51,7 @@ void GLRenderer::createParticleBuffers() {
             particles[index].position.x = i / width * 2 - 1.0;
             particles[index].position.y = j / height * 2 - 1.0;
             particles[index].position.z = 1;
-            particles[index].previousPosition = particles[index].position;
-            particles[index].acceleration = glm::vec3(0,0,0);
+            particles[index].velocity = glm::vec3(0,0,0);
         }
     }
     
