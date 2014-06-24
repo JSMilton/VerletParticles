@@ -32,6 +32,8 @@ public:
     void render(float dt);
     void reshape(int width, int height);
     void destroy();
+    void getMousePosition(float x, float y, float z);
+    void getMouseAcceleration(float x, float y, float z);
     
 private:
     void createFrameBuffers();
@@ -57,4 +59,7 @@ private:
     
     BillboardShader *mBillboardShader;
     FeedbackShader *mFeedbackShader;
+    
+    glm::vec3 mMousePosition;
+    glm::vec3 mMouseAcceleration;
 };

@@ -83,6 +83,8 @@ void GLRenderer::render(float dt) {
     
     mFeedbackShader->enable();
     glUniform1f(mFeedbackShader->mDeltaTimeHandle, dt);
+    glUniform3f(mFeedbackShader->mMousePositionHandle, mMousePosition.x, mMousePosition.y, mMousePosition.z);
+    glUniform3f(mFeedbackShader->mMouseAccelerationHandle, mMouseAcceleration.x, mMouseAcceleration.y * -1, mMouseAcceleration.z);
     glBindVertexArray(mVAO[(mCurrentBuffer+1)%BUFFER_COUNT]);
     glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mVBO[mCurrentBuffer]);
     glEnable(GL_RASTERIZER_DISCARD);
@@ -126,6 +128,14 @@ void GLRenderer::freeGLBindings(void) const
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindTexture(GL_TEXTURE_2D,          0);
     glBindTexture(GL_TEXTURE_CUBE_MAP,    0);
+}
+
+void GLRenderer::getMousePosition(float x, float y, float z) {
+    mMousePosition = glm::vec3(x,y,z);
+}
+
+void GLRenderer::getMouseAcceleration(float x, float y, float z) {
+    mMouseAcceleration = glm::vec3(x,y,z);
 }
 
 void GLRenderer::resetFramebuffers() {

@@ -283,6 +283,22 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink,
 	CVDisplayLinkRelease(displayLink);
 }
 
+#pragma mark - Mouse Events
+
+- (void)mouseDragged:(NSEvent *)theEvent {
+    glRenderer->getMouseAcceleration(theEvent.deltaX, theEvent.deltaY, 0);
+    glRenderer->getMousePosition(theEvent.locationInWindow.x, theEvent.locationInWindow.y, 0);
+}
+
+- (void)mouseDown:(NSEvent *)theEvent {
+    glRenderer->getMousePosition(theEvent.locationInWindow.x, theEvent.locationInWindow.y, 0);
+}
+
+- (void)mouseUp:(NSEvent *)theEvent {
+    glRenderer->getMouseAcceleration(0, 0, 0);
+    glRenderer->getMousePosition(0, 0, 0);
+}
+
 #pragma mark - Leap Motion Shit
 
 //- (void)run

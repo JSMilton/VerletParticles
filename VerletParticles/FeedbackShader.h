@@ -13,7 +13,7 @@ public:
     FeedbackShader();
     
     GLint mDeltaTimeHandle;
-    GLint mMousePreviousPositionHandle;
+    GLint mMouseAccelerationHandle;
     GLint mMousePositionHandle;
     GLint mAreaOfEffectHandle;
 };
