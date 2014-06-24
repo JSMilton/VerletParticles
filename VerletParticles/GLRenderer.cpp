@@ -85,6 +85,15 @@ void GLRenderer::render(float dt) {
     
     freeGLBindings();
     
+    mFeedbackShader->enable();
+    glBindVertexArray(mVAO[(mCurrentBuffer+1)%BUFFER_COUNT]);
+    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mVBO[mCurrentBuffer]);
+    glEnable(GL_RASTERIZER_DISCARD);
+    glBeginTransformFeedback(GL_POINTS);
+    glDrawArrays(GL_POINTS, 0, MAX_PARTICLES);
+    glEndTransformFeedback();
+    glDisable(GL_RASTERIZER_DISCARD);
+    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     glm::mat4 mvp = mProjectionMatrix * mViewMatrix;
@@ -95,9 +104,11 @@ void GLRenderer::render(float dt) {
     glUniformMatrix4fv(mBillboardShader->mModelViewProjectionHandle, 1, GL_FALSE, glm::value_ptr(mvp));
     glUniform3f(mBillboardShader->mRightHandle, right.x, right.y, right.z);
     glUniform3f(mBillboardShader->mUpHandle, up.x, up.y, up.z);
-    glUniform1f(mBillboardShader->mBillboardSizeHandle, 0.01f);
-    glBindVertexArray(mVAO[0]);
+    glUniform1f(mBillboardShader->mBillboardSizeHandle, BILLBOARD_SIZE);
+    glBindVertexArray(mVAO[mCurrentBuffer]);
     glDrawArrays(GL_POINTS, 0, MAX_PARTICLES);
+    
+    mCurrentBuffer = (mCurrentBuffer + 1) % BUFFER_COUNT;
 }
 
 void GLRenderer::reshape(int width, int height) {

@@ -15,6 +15,7 @@
 
 #define BUFFER_COUNT 2
 #define MAX_PARTICLES 10000
+#define BILLBOARD_SIZE 0.01f
 
 class BillboardShader;
 class FeedbackShader;

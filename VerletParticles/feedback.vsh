@@ -12,6 +12,6 @@ out vec3 vAcceleration;
 void main()
 {
     vPreviousPosition = aPosition;
-    vPosition = aPosition + 0.1;
+    vPosition = aPosition + 0.001;
     vAcceleration = vec3(0);
 }
