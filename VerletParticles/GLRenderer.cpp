@@ -81,10 +81,15 @@ void GLRenderer::render(float dt) {
     
     freeGLBindings();
     
+    glm::mat4 mvp = mProjectionMatrix * mViewMatrix;
+    glm::vec4 right = mViewMatrix[0];
+    glm::vec4 up = mViewMatrix[1];
+    
     mFeedbackShader->enable();
     glUniform1f(mFeedbackShader->mDeltaTimeHandle, dt);
     glUniform3f(mFeedbackShader->mMousePositionHandle, mMousePosition.x, mMousePosition.y, mMousePosition.z);
     glUniform3f(mFeedbackShader->mMouseAccelerationHandle, mMouseAcceleration.x, mMouseAcceleration.y * -1, mMouseAcceleration.z);
+    glUniformMatrix4fv(mFeedbackShader->mModelViewProjectionMatrixHandle, 1, GL_FALSE, glm::value_ptr(mvp));
     glBindVertexArray(mVAO[(mCurrentBuffer+1)%BUFFER_COUNT]);
     glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mVBO[mCurrentBuffer]);
     glEnable(GL_RASTERIZER_DISCARD);
@@ -94,10 +99,6 @@ void GLRenderer::render(float dt) {
     glDisable(GL_RASTERIZER_DISCARD);
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    glm::mat4 mvp = mProjectionMatrix * mViewMatrix;
-    glm::vec4 right = mViewMatrix[0];
-    glm::vec4 up = mViewMatrix[1];
     
     mBillboardShader->enable();
     glUniformMatrix4fv(mBillboardShader->mModelViewProjectionHandle, 1, GL_FALSE, glm::value_ptr(mvp));

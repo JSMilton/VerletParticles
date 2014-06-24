@@ -13,4 +13,5 @@ FeedbackShader::FeedbackShader() : BaseShader("feedback", NULL, NULL) {
     mMousePositionHandle = getUniformLocation("uMousePosition");
     mMouseAccelerationHandle = getUniformLocation("uMouseAcceleration");
     mAreaOfEffectHandle = getUniformLocation("uAreaOfEffect");
+    mModelViewProjectionMatrixHandle = getUniformLocation("uModelViewProjectionMatrix");
 }
