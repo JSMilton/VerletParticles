@@ -9,5 +9,8 @@
 #include "FeedbackShader.h"
 
 FeedbackShader::FeedbackShader() : BaseShader("feedback", NULL, NULL) {
-    //mDeltaTimeHandle = getUniformLocation("u_DeltaTime");
+    mDeltaTimeHandle = getUniformLocation("uDeltaTime");
+    mMousePositionHandle = getUniformLocation("uMousePosition");
+    mMousePreviousPositionHandle = getUniformLocation("uMousePreviousPosition");
+    mAreaOfEffectHandle = getUniformLocation("uAreaOfEffect");
 }

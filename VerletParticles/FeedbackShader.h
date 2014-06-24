@@ -11,5 +11,9 @@
 class FeedbackShader : public BaseShader {
 public:
     FeedbackShader();
-    //GLint mDeltaTimeHandle;
+    
+    GLint mDeltaTimeHandle;
+    GLint mMousePreviousPositionHandle;
+    GLint mMousePositionHandle;
+    GLint mAreaOfEffectHandle;
 };

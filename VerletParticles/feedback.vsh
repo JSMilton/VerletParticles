@@ -7,7 +7,10 @@ out vec3 vPosition;
 out vec3 vPreviousPosition;
 out vec3 vAcceleration;
 
-//uniform float uDeltaTime;
+uniform float uDeltaTime;
+uniform vec3 uMousePosition;
+uniform vec3 uMousePreviousPosition;
+uniform float uAreaOfEffect;
 
 void main()
 {
