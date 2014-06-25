@@ -20,6 +20,9 @@ void GLRenderer::initOpenGL() {
     initBillboardShader();
     initFeedbackShader();
     
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
     render(0.0);
 }
 
@@ -42,17 +45,17 @@ void GLRenderer::initFeedbackShader() {
 
 void GLRenderer::createParticleBuffers() {
     Particle particles[MAX_PARTICLES];
-    float width, height;
-    width = sqrt((float)MAX_PARTICLES);
-    height = width;
-    for (int i = 0; i < width; i++){
-        for (int j = 0; j < height; j++){
-            int index = i * width + j;
-            particles[index].position.x = i / width * 2 - 1.0;
-            particles[index].position.y = j / height * 2 - 1.0;
-            particles[index].position.z = 1;
-            particles[index].velocity = glm::vec3(0,0,0);
-        }
+    
+    for (int i = 0; i < MAX_PARTICLES; i++){
+        
+        float randomX, randomY;
+        randomX = ((rand() % 2000) / 1000.0) - 1.0;
+        randomY = ((rand() % 2000) / 1000.0) - 1.0;
+        
+        particles[i].position.x = randomX;
+        particles[i].position.y = randomY;
+        particles[i].position.z = 1;
+        particles[i].velocity = glm::vec3(0,0,0);
     }
     
     glGenBuffers(BUFFER_COUNT, mVBO);
@@ -87,6 +90,7 @@ void GLRenderer::render(float dt) {
     
     mFeedbackShader->enable();
     glUniform1f(mFeedbackShader->mDeltaTimeHandle, dt);
+    glUniform1f(mFeedbackShader->mAreaOfEffectHandle, AREA_OF_EFFECT);
     glUniform3f(mFeedbackShader->mMousePositionHandle, mMousePosition.x, mMousePosition.y, mMousePosition.z);
     glUniform3f(mFeedbackShader->mMouseAccelerationHandle, mMouseAcceleration.x, mMouseAcceleration.y * -1, mMouseAcceleration.z);
     glUniformMatrix4fv(mFeedbackShader->mModelViewProjectionMatrixHandle, 1, GL_FALSE, glm::value_ptr(mvp));
@@ -99,7 +103,7 @@ void GLRenderer::render(float dt) {
     glDisable(GL_RASTERIZER_DISCARD);
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+    glEnable(GL_DEPTH_TEST);
     mBillboardShader->enable();
     glUniformMatrix4fv(mBillboardShader->mModelViewProjectionHandle, 1, GL_FALSE, glm::value_ptr(mvp));
     glUniform3f(mBillboardShader->mRightHandle, right.x, right.y, right.z);
@@ -107,6 +111,7 @@ void GLRenderer::render(float dt) {
     glUniform1f(mBillboardShader->mBillboardSizeHandle, BILLBOARD_SIZE);
     glBindVertexArray(mVAO[mCurrentBuffer]);
     glDrawArrays(GL_POINTS, 0, MAX_PARTICLES);
+    glDisable(GL_DEPTH_TEST);
     
     mCurrentBuffer = (mCurrentBuffer + 1) % BUFFER_COUNT;
 }
@@ -132,7 +137,7 @@ void GLRenderer::freeGLBindings(void) const
 }
 
 void GLRenderer::getMousePosition(float x, float y, float z) {
-    mMousePosition = glm::vec3(x,y,z);
+    mMousePosition = glm::vec3((x/mViewWidth) * 2.0 - 1.0,(y/mViewHeight) * 2.0 - 1.0,z);
 }
 
 void GLRenderer::getMouseAcceleration(float x, float y, float z) {
