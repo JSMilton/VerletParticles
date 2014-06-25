@@ -296,7 +296,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink,
 
 - (void)mouseUp:(NSEvent *)theEvent {
     glRenderer->getMouseAcceleration(0, 0, 0);
-    glRenderer->getMousePosition(0, 0, 0);
+    //glRenderer->getMousePosition(0, 0, 0);
 }
 
 #pragma mark - Leap Motion Shit

@@ -121,7 +121,7 @@ void GLRenderer::reshape(int width, int height) {
     mViewWidth = width;
     mViewHeight = height;
     mProjectionMatrix = glm::perspective(45.0f, (float)width/(float)height, 0.1f, 100.0f);
-    mViewMatrix = glm::lookAt(glm::vec3(0,0,7), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    mViewMatrix = glm::lookAt(glm::vec3(0,0,10), glm::vec3(0,0,0), glm::vec3(0,1,0));
     
     createFrameBuffers();
 }
