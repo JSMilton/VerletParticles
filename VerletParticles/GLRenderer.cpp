@@ -21,7 +21,7 @@ void GLRenderer::initOpenGL() {
     initFeedbackShader();
     
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     
     render(0.0);
 }
@@ -103,7 +103,7 @@ void GLRenderer::render(float dt) {
     glDisable(GL_RASTERIZER_DISCARD);
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
+   // glEnable(GL_DEPTH_TEST);
     mBillboardShader->enable();
     glUniformMatrix4fv(mBillboardShader->mModelViewProjectionHandle, 1, GL_FALSE, glm::value_ptr(mvp));
     glUniform3f(mBillboardShader->mRightHandle, right.x, right.y, right.z);
@@ -111,7 +111,7 @@ void GLRenderer::render(float dt) {
     glUniform1f(mBillboardShader->mBillboardSizeHandle, BILLBOARD_SIZE);
     glBindVertexArray(mVAO[mCurrentBuffer]);
     glDrawArrays(GL_POINTS, 0, MAX_PARTICLES);
-    glDisable(GL_DEPTH_TEST);
+    //glDisable(GL_DEPTH_TEST);
     
     mCurrentBuffer = (mCurrentBuffer + 1) % BUFFER_COUNT;
 }

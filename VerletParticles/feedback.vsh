@@ -27,7 +27,7 @@ void main()
     vec3 accel = vec3(0);
     
     if (screenPosition.x <= maxX && screenPosition.x >= minX && screenPosition.y <= maxY && screenPosition.y >= minY){
-        accel = uMouseAcceleration * 0.5;
+        accel = uMouseAcceleration;
     }
     
     vec3 oldVel = aVelocity;
@@ -47,4 +47,3 @@ void main()
     vVelocity = newVel;
     vVelocity *= 0.99;
 }
-
