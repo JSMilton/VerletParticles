@@ -32,7 +32,7 @@ void main()
     float forceY = 0;
     float force = 0;
     float distSquared = pow(x - screenMouse.x, 2) + pow(y - screenMouse.y, 2);
-    force = 0.5 / distSquared;
+    force = 1.f / distSquared;
     forceX = (screenMouse.x - x) * force;
     forceY = (screenMouse.y - y) * force;
     
@@ -40,6 +40,9 @@ void main()
     vec3 accel = vec3(forceX, forceY, 0);
     vec3 oldVel = aVelocity;
     vec3 newVel = aVelocity + accel * uDeltaTime;
+    if (uMousePosition.x == -1.0 && uMousePosition.y == -1.0){
+        newVel = aVelocity;
+    }
     
 //    if (screenPosition.y >= 1.0 || screenPosition.y <= -1.0){
 //        newVel.y *= -1;
