@@ -11,7 +11,7 @@
 #include "FeedbackShader.h"
 
 void GLRenderer::initOpenGL() {
-    glClearColor(0.f, 0.f, 0.f, 1.0f);
+    glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
     mViewWidth = 1200;
     mViewHeight = 800;
     reshape(1200, 800);
@@ -21,7 +21,7 @@ void GLRenderer::initOpenGL() {
     initFeedbackShader();
     
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     render(0.0);
 }

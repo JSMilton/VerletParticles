@@ -25,8 +25,6 @@ void main()
     float maxX = uMousePosition.x + uAreaOfEffect;
     float minY = uMousePosition.y - uAreaOfEffect;
     float maxY = uMousePosition.y + uAreaOfEffect;
-   // screenMouse.x = 1.0;
-   // screenMouse.y = 1.0;
     
     float x = aPosition.x;
     float y = aPosition.y;
@@ -34,18 +32,12 @@ void main()
     float forceY = 0;
     float force = 0;
     float distSquared = pow(x - screenMouse.x, 2) + pow(y - screenMouse.y, 2);
-    force = 1.0 / distSquared;
+    force = 0.5 / distSquared;
     forceX = (screenMouse.x - x) * force;
     forceY = (screenMouse.y - y) * force;
     
     
     vec3 accel = vec3(forceX, forceY, 0);
-//    float updateConstraint = 1;
-//    if (screenPosition.x <= maxX && screenPosition.x >= minX && screenPosition.y <= maxY && screenPosition.y >= minY){
-//        accel = uMouseAcceleration * 1;
-//        updateConstraint = 0;
-//    }
-    
     vec3 oldVel = aVelocity;
     vec3 newVel = aVelocity + accel * uDeltaTime;
     
@@ -62,22 +54,4 @@ void main()
     vPosition = aPosition + (oldVel + newVel) * 0.5 * uDeltaTime;
     vVelocity = newVel;
     vVelocity *= 0.99;
-    
-//    if (updateConstraint == 1){
-//        vec3 attractor = vec3(0);
-//        float restingDistance = 1.0;
-//        
-//        float diffX = attractor.x - vPosition.x;
-//        float diffY = attractor.y - vPosition.y;
-//        float d = sqrt(diffX * diffX + diffY * diffY);
-//        // difference scalar
-//        float difference = (restingDistance - d) / d;
-//        
-//        // translation for each PointMass. They'll be pushed 1/2 the required distance to match their resting distances.
-//        float translateX = diffX * 0.5 * difference;
-//        float translateY = diffY * 0.5 * difference;
-//        
-//        vVelocity.x += translateX;
-//        vVelocity.y += translateY;
-//    }
 }
