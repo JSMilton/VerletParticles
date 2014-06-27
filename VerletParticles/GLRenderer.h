@@ -14,7 +14,7 @@
 #include "Utils.h"
 
 #define BUFFER_COUNT 2
-#define MAX_PARTICLES 300000
+#define MAX_PARTICLES 15000
 #define BILLBOARD_SIZE 0.01f
 #define AREA_OF_EFFECT 0.5f
 
@@ -49,9 +49,14 @@ private:
     glm::mat4 mProjectionMatrix;
     glm::mat4 mViewMatrix;
     glm::mat4 mPreviousViewMatrix;
+    glm::mat4 mInverseMVPMatrix;
     
     int mViewWidth;
     int mViewHeight;
+    float mMouseWidth;
+    float mMouseHeight;
+    
+    glm::vec4 mMouseTransform;
     
     int mCurrentBuffer;
     

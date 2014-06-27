@@ -17,4 +17,5 @@ public:
     GLint mMousePositionHandle;
     GLint mAreaOfEffectHandle;
     GLint mModelViewProjectionMatrixHandle;
+    GLint mInverseMVPMatrixHandle;
 };

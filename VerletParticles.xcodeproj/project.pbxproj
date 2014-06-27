@@ -132,6 +132,7 @@
 		432305B8195880D200BA0BD8 /* billboard.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 432305B5195880D200BA0BD8 /* billboard.fsh */; };
 		432305B9195880D200BA0BD8 /* billboard.gsh in Resources */ = {isa = PBXBuildFile; fileRef = 432305B6195880D200BA0BD8 /* billboard.gsh */; };
 		432305BA195880D200BA0BD8 /* billboard.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 432305B7195880D200BA0BD8 /* billboard.vsh */; };
+		4F2B4834195D82CF00063717 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F2B4833195D82CF00063717 /* GLKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -433,6 +434,7 @@
 		432305B5195880D200BA0BD8 /* billboard.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = billboard.fsh; sourceTree = "<group>"; };
 		432305B6195880D200BA0BD8 /* billboard.gsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = billboard.gsh; sourceTree = "<group>"; };
 		432305B7195880D200BA0BD8 /* billboard.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = billboard.vsh; sourceTree = "<group>"; };
+		4F2B4833195D82CF00063717 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -440,6 +442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F2B4834195D82CF00063717 /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +459,7 @@
 		432303FC19587FE900BA0BD8 = {
 			isa = PBXGroup;
 			children = (
+				4F2B4833195D82CF00063717 /* GLKit.framework */,
 				4323040719587FE900BA0BD8 /* VerletParticles */,
 				4323041B19587FE900BA0BD8 /* VerletParticlesTests */,
 				4323040619587FE900BA0BD8 /* Products */,

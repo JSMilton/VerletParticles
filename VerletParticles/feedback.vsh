@@ -11,15 +11,16 @@ uniform vec3 uMouseAcceleration;
 uniform float uAreaOfEffect;
 
 uniform mat4 uModelViewProjectionMatrix;
+uniform mat4 uInverseMVPMatrix;
 
 void main()
 {
     vec4 screenMouse = vec4(uMousePosition, 1.0);
-    screenMouse.xyz /= screenMouse.w;
+    //screenMouse.xyz /= screenMouse.w;
     vec4 screenPosition = uModelViewProjectionMatrix * vec4(aPosition, 1.0);
     screenPosition.xyz /= screenPosition.w;
-    screenMouse.y *= 3;
-    screenMouse.x *= 4;
+    //screenMouse.y *= 3;
+    //screenMouse.x *= 4;
     
     float minX = uMousePosition.x - uAreaOfEffect;
     float maxX = uMousePosition.x + uAreaOfEffect;
@@ -31,12 +32,11 @@ void main()
     float forceX = 0;
     float forceY = 0;
     float force = 0;
-    float distSquared = pow(x - screenMouse.x, 2) + pow(y - screenMouse.y, 2);
+    float distSquared = pow(x - uMousePosition.x, 2) + pow(y - uMousePosition.y, 2);
     force = 1.f / distSquared;
-    forceX = (screenMouse.x - x) * force;
-    forceY = (screenMouse.y - y) * force;
-    
-    
+    forceX = (uMousePosition.x - x) * force;
+    forceY = (uMousePosition.y - y) * force;
+
     vec3 accel = vec3(forceX, forceY, 0);
     vec3 oldVel = aVelocity;
     vec3 newVel = aVelocity + accel * uDeltaTime;

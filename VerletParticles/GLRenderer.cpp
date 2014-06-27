@@ -94,6 +94,7 @@ void GLRenderer::render(float dt) {
     glUniform3f(mFeedbackShader->mMousePositionHandle, mMousePosition.x, mMousePosition.y, mMousePosition.z);
     glUniform3f(mFeedbackShader->mMouseAccelerationHandle, mMouseAcceleration.x, mMouseAcceleration.y * -1, mMouseAcceleration.z);
     glUniformMatrix4fv(mFeedbackShader->mModelViewProjectionMatrixHandle, 1, GL_FALSE, glm::value_ptr(mvp));
+    glUniformMatrix4fv(mFeedbackShader->mInverseMVPMatrixHandle, 1, GL_FALSE, glm::value_ptr(mInverseMVPMatrix));
     glBindVertexArray(mVAO[(mCurrentBuffer+1)%BUFFER_COUNT]);
     glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mVBO[mCurrentBuffer]);
     glEnable(GL_RASTERIZER_DISCARD);
@@ -123,6 +124,10 @@ void GLRenderer::reshape(int width, int height) {
     mProjectionMatrix = glm::perspective(45.0f, (float)width/(float)height, 0.1f, 100.0f);
     mViewMatrix = glm::lookAt(glm::vec3(0,0,10), glm::vec3(0,0,0), glm::vec3(0,1,0));
     
+    glm::vec4 fwidth, fheight;
+    fwidth = mProjectionMatrix * mViewMatrix * glm::vec4(mViewWidth, mViewHeight, 0, 1);
+    mMouseWidth = fwidth.x /= fwidth.w;
+    mMouseHeight = fwidth.y /= fwidth.w;
     createFrameBuffers();
 }
 
@@ -137,7 +142,22 @@ void GLRenderer::freeGLBindings(void) const
 }
 
 void GLRenderer::getMousePosition(float x, float y, float z) {
-    mMousePosition = glm::vec3((x/mViewWidth) * 2.0 - 1.0,(y/mViewHeight) * 2.0 - 1.0,z);
+    
+    if (z == INT32_MAX){
+        mMousePosition = glm::vec3(-1.0,-1.0,0);
+    } else {
+        float w = ((x - (mViewWidth/2)) /mMouseWidth) * 2.0;
+        // w -= w;
+        float h = ((y - (mViewHeight/2)) /mMouseHeight) * 2.0;
+        // h -= h;
+        
+        mMousePosition = glm::vec3(w,h,z);
+    }
+    
+    //mMousePosition.x *= w;
+    //mMouseTransform = mProjectionMatrix * mViewMatrix * glm::vec4(mMousePosition.x,mMousePosition.y,mMousePosition.z, 1);
+    //mMousePosition = glm::vec3(mMouseTransform.x,mMouseTransform.y,mMouseTransform.z);
+    
 }
 
 void GLRenderer::getMouseAcceleration(float x, float y, float z) {
