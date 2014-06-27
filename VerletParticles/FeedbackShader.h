@@ -13,9 +13,5 @@ public:
     FeedbackShader();
     
     GLint mDeltaTimeHandle;
-    GLint mMouseAccelerationHandle;
     GLint mMousePositionHandle;
-    GLint mAreaOfEffectHandle;
-    GLint mModelViewProjectionMatrixHandle;
-    GLint mInverseMVPMatrixHandle;
 };
