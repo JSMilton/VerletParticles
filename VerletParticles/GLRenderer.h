@@ -14,8 +14,8 @@
 #include "Utils.h"
 
 #define BUFFER_COUNT 2
-#define MAX_PARTICLES 12500
-#define BILLBOARD_SIZE 0.01f
+#define MAX_PARTICLES 1000000
+#define BILLBOARD_SIZE 0.0025f
 #define AREA_OF_EFFECT 0.5f
 
 class BillboardShader;
@@ -68,4 +68,6 @@ private:
     
     glm::vec3 mMousePosition;
     glm::vec3 mMouseAcceleration;
+    
+    Particle particles[MAX_PARTICLES];
 };
