@@ -14,8 +14,8 @@
 #include "Utils.h"
 
 #define BUFFER_COUNT 2
-#define MAX_PARTICLES 1000000
-#define BILLBOARD_SIZE 0.0025f
+#define MAX_PARTICLES 500000
+#define BILLBOARD_SIZE 0.0075f
 #define AREA_OF_EFFECT 0.5f
 
 class BillboardShader;

@@ -12,11 +12,11 @@
 GLchar* getShaderString(const char* shaderName, const char* shaderType) {
     CFBundleRef mainBundle = CFBundleGetMainBundle();
     
-    CFStringRef shaderNameRef = CFStringCreateWithCStringNoCopy(NULL, shaderName,
-                                                   kCFStringEncodingASCII, NULL);
+    CFStringRef shaderNameRef = CFStringCreateWithCString(NULL, shaderName,
+                                                   kCFStringEncodingASCII);
     
-    CFStringRef shaderTypeRef = CFStringCreateWithCStringNoCopy(NULL, shaderType,
-                                                   kCFStringEncodingASCII, NULL);
+    CFStringRef shaderTypeRef = CFStringCreateWithCString(NULL, shaderType,
+                                                   kCFStringEncodingASCII);
     
     // Get a reference to the file's URL
     CFURLRef shaderURL = CFBundleCopyResourceURL(mainBundle, shaderNameRef, shaderTypeRef, NULL);

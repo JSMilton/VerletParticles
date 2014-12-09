@@ -16,7 +16,7 @@ void main()
     float forceY = 0;
     float force = 0;
     float distSquared = pow(x - uMousePosition.x, 2) + pow(y - uMousePosition.y, 2);
-    force = 2.f / distSquared;
+    force = 1.5f / distSquared;
     forceX = (uMousePosition.x - x) * force;
     forceY = (uMousePosition.y - y) * force;
 

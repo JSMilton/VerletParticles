@@ -232,7 +232,9 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink,
     NSRect viewRectPixels = [self getViewRect];
 	   
 	// Set the new dimensions in our renderer
-    glRenderer->reshape(viewRectPixels.size.width, viewRectPixels.size.height);
+    if (glRenderer != NULL){
+        glRenderer->reshape(viewRectPixels.size.width, viewRectPixels.size.height);
+    }
 	
 	CGLUnlockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
 }
